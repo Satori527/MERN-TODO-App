@@ -98,7 +98,7 @@ function Dashboard() {
                 <CustomizedDividers/>
             </div>
                     {tasks.map((task) => (
-                        <CustomCard key={task._id} id={task._id} title={task.title} description={task.description} due_date={task.due_date} priority={task.priority} status={task.status} user_id={task.user}/>
+                        <CustomCard key={task._id} id={task._id} title={task.title} description={task.description} due_date={task.due_date} priority={task.priority} status={task.status} user_id={task.user} fetchTasks={fetchTasks}/>
                 ))}
                 
 

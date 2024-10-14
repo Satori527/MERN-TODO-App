@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { axiosAPI } from '../../api/axiosAPI';
 import "./CustomCard.css";
 
-function CustomCard({title, description , priority, status, due_date, id, user}) {
+function CustomCard({title, description , priority, status, due_date, id, user, fetchTasks}) {
 
     const [expanded, setExpanded] = useState(false);
     const [editing, setEditing] = useState(false);
@@ -73,6 +73,7 @@ function CustomCard({title, description , priority, status, due_date, id, user})
             })
             if (response.status === 200) {
                 setDisplay("none");
+                fetchTasks();
             }
             console.log(response);
             
