@@ -12,30 +12,50 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../../store/authSlice';
 import './MuiHeader.css';
 
 const options = ['Create Task','Due Date Sort', 'Status Filter', 'Priority Filter'];
 const settings = ['Logout'];
 
 function ResponsiveAppBar() {
-const [auth, setAuth] = React.useState(false);
-const [anchorElNav, setAnchorElNav] = React.useState(null);
-const [anchorElUser, setAnchorElUser] = React.useState(null);
+    
+    const status = useSelector((state) => state.auth.status)
+    const userData = useSelector((state) => state.auth.userData)
 
-const handleOpenNavMenu = (event) => {
-setAnchorElNav(event.currentTarget);
-};
-const handleOpenUserMenu = (event) => {
-setAnchorElUser(event.currentTarget);
-};
+    const dispatch = useDispatch();
+    const Navigate = useNavigate();
 
-const handleCloseNavMenu = () => {
-setAnchorElNav(null);
-};
+    const [auth, setAuth] = React.useState(false);
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-const handleCloseUserMenu = () => {
-setAnchorElUser(null);
-};
+    const handleLoginNavigation = () => {
+        Navigate('/login')
+    };
+
+    const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+    };
+
+    const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+    };
+
+    const handleLogout = () => {
+        setAnchorElUser(null);
+        dispatch(logout())
+        Navigate('/login')
+    };
 
 return (
 <AppBar id="MuiHeader" position="sticky" sx={{zIndex: 998,boxShadow: '1px 2px 8px 1px rgba(0, 0, 0, 0.12)' }}>
@@ -124,12 +144,12 @@ return (
 
 
         <Box sx={{ flexGrow: 0 }}>
-        {auth?<Tooltip title="Open settings">
+        {status?<Tooltip title="Open settings">
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            <Avatar alt="Remy Sharp" src={userData.user.avatar} />
             </IconButton>
         </Tooltip>:
-        <Button color="secondary" variant="contained" onClick={handleOpenUserMenu}>Login</Button>}
+        <Button color="secondary" variant="contained" onClick={handleLoginNavigation}>Login</Button>}
         <Menu
             sx={{ mt: '45px' }}
             id="menu-appbar"
@@ -147,7 +167,7 @@ return (
             onClose={handleCloseUserMenu}
         >
             {settings.map((setting) => (
-            <MenuItem key={setting} onClick={handleCloseUserMenu}>
+            <MenuItem key={setting} onClick={handleLogout}>
                 <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
             </MenuItem>
             ))}

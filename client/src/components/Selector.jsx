@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup, {
-    toggleButtonGroupClasses,
+  toggleButtonGroupClasses,
 } from '@mui/material/ToggleButtonGroup';
 import * as React from 'react';
 
@@ -74,7 +74,7 @@ export default function CustomizedDividers() {
 
           <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 1 }} />
 
-          <ToggleButton color='info' value="right" aria-label="right aligned">
+          <ToggleButton color='success' value="right" aria-label="right aligned">
             <Typography sx={{ fontWeight: 'bold',fontSize: '14px',color: 'white' }}>
                 Low
             </Typography>

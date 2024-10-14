@@ -23,8 +23,8 @@ router.route("/").get(verifyJWT ,fetchTasks).post(verifyJWT ,createTask);
 
 router.route("/paginate").get(verifyJWT ,paginateTasks)
 
-router.route("/update").post(verifyJWT ,updateTask);
-router.route("/delete").post(verifyJWT ,deleteTask);
+router.route("/update").patch(verifyJWT ,updateTask);
+router.route("/delete").patch(verifyJWT ,deleteTask);
 
 router.route("/sort").get(verifyJWT, sortTasksByDueDate)
 router.route("/filter/status").get(verifyJWT, filterTasksByStatus)

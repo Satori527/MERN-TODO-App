@@ -25,19 +25,19 @@ const createTask = asyncHandler(async (req, res) => {
 })
 
 const fetchTasks = asyncHandler(async (req, res) => {
-    const Tasks = await Task.find({user: req.body.user_id});
+    const Tasks = await Task.find({user: req.query.user_id});
     res.status(200).json(new ApiResponse(200, Tasks, "Tasks fetched successfully"))
 })
 
 const paginateTasks = asyncHandler(async (req, res) => {
-    const {page = 1, limit = 10} = req.query
+    const {page = 1, limit = 10, user_id} = req.query
 
     console.log(page, limit)
     console.log(req.body.user_id)
     const startIndex=(page-1)*limit
     const lastIndex=(page)*limit
     let Tasks = {}
-    Tasks.data = await Task.find({user: req.body.user_id}).skip((page-1)*limit).limit(limit)
+    Tasks.data = await Task.find({user: user_id}).skip((page-1)*limit).limit(limit)
 
     // if(lastIndex<Tasks.length){
     //     Tasks.next={
@@ -51,11 +51,12 @@ const paginateTasks = asyncHandler(async (req, res) => {
 })
 
 const updateTask = asyncHandler(async (req, res) => {
+    console.log(req.body)
     const updatedTask = await Task.replaceOne(
         {_id:req.body.task_id},
         req.body
     );
-
+    console.log(updatedTask);
     res.status(200).json(new ApiResponse(200, updatedTask,"Task updated successfully"))
 })
 
