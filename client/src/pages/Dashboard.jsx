@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { axiosAPI } from "../api/axiosAPI";
 import CustomCard from "../components/cards/CustomCard";
+import TaskForm from "../components/cards/TaskForm";
 import CustomizedDividers from "../components/Selector";
 import List from "../components/sidebar/Sidebar";
 
@@ -65,6 +66,8 @@ function Dashboard() {
     const statuses = ['Pending', 'In Progress', 'Completed'];
     const filters = ['All', 'Due Date', 'Priority', 'Status'];
     const dueDateSorts = ['On', 'Off'];
+
+    const [createTask, setCreateTask] = useState(false)
     
     const [page, setPage] = useState(1);
     const [tasks, setTasks] = useState([]);
@@ -155,7 +158,7 @@ function Dashboard() {
                 break;
         }
         window.scrollTo(0, 0)
-    },[filter,priority,status,dueDateSort,userData, page])
+    },[filter, priority, status, dueDateSort, userData, page])
 
     useEffect(() => {
         setDueDateSort(0)
@@ -195,10 +198,10 @@ function Dashboard() {
 
     return (
         <div className="flex flex-row w-full h-svh">
-            <List setFilter={setFilter} filter={filter}/>
+            <List setFilter={setFilter} filter={filter} setCreateTask={setCreateTask}/>
             <div className="flex flex-col w-full ml-56 mt-16 h-fit gap-4 relative bg-gray-400 pt-6 pb-40 rounded-2xl "
             style={{boxShadow: "inset 0 2px 8px 2px rgba(0, 0, 0, 0.5)"}}>
-
+            
             <p>{filter===3 && statuses[status]}</p>
             <div className="flex flex-row-reverse py-4 w-11/12">
                 {filter === 1 && <CustomizedDividers options={dueDateSorts} handleToggle={handleToggle} />}
@@ -206,7 +209,10 @@ function Dashboard() {
                 {filter === 3 && <CustomizedDividers options={statuses} handleToggle={handleToggle} />}
                 
             </div>
-                    {tasks.map((task) => (
+
+            {createTask && <TaskForm user={userData.user._id} setCreateTask={setCreateTask} />}
+
+                {tasks.map((task) => (
                         <CustomCard key={task._id} id={task._id} title={task.title} description={task.description} due_date={task.due_date} priority={task.priority} status={task.status} user_id={task.user} fetchTasks={fetchTasks}/>
                 ))}
                 
