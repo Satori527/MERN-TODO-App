@@ -74,7 +74,7 @@ const sortTasksByDueDate = asyncHandler(async (req, res) => {
 
     const {page = 1, limit = 10} = req.query
 
-    const sortedTasks = await Task.find({user: req.body.user_id}).sort({due_date: 1}).skip((page-1)*limit).limit(limit)
+    const sortedTasks = await Task.find({user: req.query.user}).sort({due_date: 1}).skip((page-1)*limit).limit(limit)
 
     res.status(200).json(new ApiResponse(200, sortedTasks, "Tasks sorted successfully"))
 })
@@ -85,7 +85,7 @@ const filterTasksByStatus = asyncHandler(async (req, res) => {
 
     console.log(req.query.status)
 
-    const filteredTasks = await Task.find({user: req.body.user_id, status: req.query.status}).skip((page-1)*limit).limit(limit)
+    const filteredTasks = await Task.find({user: req.query.user, status: req.query.status}).skip((page-1)*limit).limit(limit)
 
     res.status(200).json(new ApiResponse(200, filteredTasks, "Tasks filtered successfully"))
 })
@@ -94,7 +94,7 @@ const filterTasksByPriority = asyncHandler(async (req, res) => {
 
     const {page = 1, limit = 10} = req.query
 
-    const filteredTasks = await Task.find({user: req.body.user_id, priority: req.query.priority}).skip((page-1)*limit).limit(limit)
+    const filteredTasks = await Task.find({user: req.query.user, priority: req.query.priority}).skip((page-1)*limit).limit(limit)
 
     res.status(200).json(new ApiResponse(200, filteredTasks, "Tasks filtered successfully"))
 })

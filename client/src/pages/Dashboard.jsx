@@ -58,11 +58,20 @@ import List from "../components/sidebar/Sidebar";
 // ]
 function Dashboard() {
 
-    const status = useSelector((state) => state.auth.status);
+    const auth = useSelector((state) => state.auth.status);
     const userData = useSelector((state) => state.auth.userData);
+
+    const priorities = ['High', 'Medium', 'Low'];
+    const statuses = ['Pending', 'In Progress', 'Completed'];
+    const filters = ['All', 'Due Date', 'Priority', 'Status'];
+    const dueDateSorts = ['On', 'Off'];
     
     const [page, setPage] = useState(1);
     const [tasks, setTasks] = useState([]);
+    const [priority, setPriority] = useState(0);
+    const [status, setStatus] = useState(0);
+    const [filter, setFilter] = useState(0);
+    const [dueDateSort, setDueDateSort] = useState(0);
 
     const fetchTasks = async () => {
         const data = await axiosAPI.get("/tasks/paginate", {params: {user_id: userData.user._id, page: page, limit: 10}}, {withCredentials: true})
@@ -71,11 +80,88 @@ function Dashboard() {
         console.log("tasks ",tasks)
     }
 
+    const filterTasksByPriority = async () => {
+        try {
+            const data = await axiosAPI.get("/tasks/filter/priority", {params:
+                {
+                    user: userData.user._id,
+                    priority: priorities[priority],
+                    page: page,
+                    limit: 10
+                }
+            }, {withCredentials: true})
+
+            setTasks(data.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const filterTasksByStatus = async () => {
+        try {
+            const data = await axiosAPI.get("/tasks/filter/status", {params:
+                {
+                    user: userData.user._id,
+                    status: statuses[status],
+                    page: page,
+                    limit: 10
+                }
+            }, {withCredentials: true})
+
+            setTasks(data.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const sortTasksByDueDate = async () => {
+        try {
+            const data = await axiosAPI.get("/tasks/sort", {params:
+                {
+                    user: userData.user._id,
+                    page: page,
+                    limit: 10
+                }
+            }, {withCredentials: true})
+
+            setTasks(data.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    // useEffect(() => {
+    //     console.log("dashboard ",userData)
+    //     fetchTasks();
+    //     window.scrollTo(0, 0)
+    // }, [userData, page])
+
     useEffect(() => {
-        console.log("dashboard ",userData)
-        fetchTasks();
+        switch (filter) {
+            case 0:
+                fetchTasks();
+                break;
+            case 1:
+                sortTasksByDueDate();
+                break;
+            case 2:
+                filterTasksByPriority();
+                break;
+            case 3:
+                filterTasksByStatus();
+                break;
+            default:
+                fetchTasks();
+                break;
+        }
         window.scrollTo(0, 0)
-    }, [userData,page])
+    },[filter,priority,status,dueDateSort,userData, page])
+
+    useEffect(() => {
+        setDueDateSort(0)
+        setPriority(0)
+        setStatus(0)
+    },[filter])
 
     const handleNext = () => {
         setPage(page + 1)
@@ -88,14 +174,37 @@ function Dashboard() {
         //fetchTasks();
     }
 
+    const handleToggle = (alignment) => {
+        console.log(alignment)
+        switch (filter) {
+            case 1:
+                setDueDateSort(alignment)
+                break;
+            case 2:
+                setPriority(alignment)
+                break;
+            case 3:
+                setStatus(alignment)
+                break;
+            default:
+                break;
+        }
+        
+    }
+
 
     return (
         <div className="flex flex-row w-full h-svh">
-            <List/>
+            <List setFilter={setFilter} filter={filter}/>
             <div className="flex flex-col w-full ml-56 mt-16 h-fit gap-4 relative bg-gray-400 pt-6 pb-40 rounded-2xl "
             style={{boxShadow: "inset 0 2px 8px 2px rgba(0, 0, 0, 0.5)"}}>
+
+            <p>{filter===3 && statuses[status]}</p>
             <div className="flex flex-row-reverse py-4 w-11/12">
-                <CustomizedDividers/>
+                {filter === 1 && <CustomizedDividers options={dueDateSorts} handleToggle={handleToggle} />}
+                {filter === 2 && <CustomizedDividers options={priorities} handleToggle={handleToggle} />}
+                {filter === 3 && <CustomizedDividers options={statuses} handleToggle={handleToggle} />}
+                
             </div>
                     {tasks.map((task) => (
                         <CustomCard key={task._id} id={task._id} title={task.title} description={task.description} due_date={task.due_date} priority={task.priority} status={task.status} user_id={task.user} fetchTasks={fetchTasks}/>

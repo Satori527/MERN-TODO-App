@@ -24,9 +24,11 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
     },
 }));
 
-export default function CustomizedDividers() {
-  const [alignment, setAlignment] = React.useState('left');
+export default function CustomizedDividers({handleToggle, options}) {
+  const [alignment, setAlignment] = React.useState(0);
   const [formats, setFormats] = React.useState(() => ['italic']);
+
+  //const options = ['High', 'Medium', 'Low'];
 
   const handleFormat = (event, newFormats) => {
     setFormats(newFormats);
@@ -34,7 +36,26 @@ export default function CustomizedDividers() {
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
+    handleToggle(newAlignment);
   };
+
+  // React.useEffect(() => {
+  //   handleToggle();
+  // }, [alignment]);
+
+  // const handleToggle = () => {
+  //   if(alignment === 'left'){
+  //     () => setPriority(0)
+      
+  //   }
+  //   if(alignment === 'center'){
+  //     () => setPriority(1)
+  //   }
+  //   if(alignment === 'right'){
+  //     () => setPriority(2)
+  //   }
+    
+  // }
 
   return (
     <div>
@@ -57,26 +78,26 @@ export default function CustomizedDividers() {
           sx={{ backgroundColor: '#000000',
           borderRadius: '12px', }}
         >
-          <ToggleButton color='error' value="left" aria-label="left aligned">
+          <ToggleButton color='error' value={0} aria-label="left aligned">
             <Typography sx={{ fontWeight: 'bold',fontSize: '14px',color: 'white' }}
-            >High</Typography>
+            >{options[0]}</Typography>
           </ToggleButton>
 
           <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 1 }} />
 
-          <ToggleButton color='warning' value="center" aria-label="centered">
+          <ToggleButton color='warning' value={1} aria-label="centered">
 
             <Typography sx={{ fontWeight: 'bold',fontSize: '14px',color: 'white' }}>
-                Medium
+                {options[1]}
             </Typography>
             
           </ToggleButton>
 
           <Divider flexItem orientation="vertical" sx={{ mx: 0.5, my: 1 }} />
 
-          <ToggleButton color='success' value="right" aria-label="right aligned">
+          <ToggleButton color='success' value={2} aria-label="right aligned">
             <Typography sx={{ fontWeight: 'bold',fontSize: '14px',color: 'white' }}>
-                Low
+                {options[2]}
             </Typography>
             
           </ToggleButton>

@@ -11,12 +11,29 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import * as React from 'react';
 
-export default function NestedList() {
+export default function NestedList( {setFilter, filter}) {
 const [open, setOpen] = React.useState(true);
+
+const [active, setActive] = React.useState([false, false, false, false]);
+const [buttonColor, setButtonColor] = React.useState(['#f0f0f0', '#f0f0f0', '#f0f0f0', '#f0f0f0']);
 
 const handleClick = () => {
 setOpen(!open);
 };
+
+React.useEffect(() => {
+    if (filter === 0) {
+        setButtonColor(['#d0d0d0', '#f0f0f0', '#f0f0f0', '#f0f0f0']);
+    } else if (filter === 1) {
+        setButtonColor(['#f0f0f0', '#d0d0d0', '#f0f0f0', '#f0f0f0']);
+    } else if (filter === 2) {
+        setButtonColor(['#f0f0f0', '#f0f0f0', '#d0d0d0', '#f0f0f0']);
+    } else if (filter === 3) {
+        setButtonColor(['#f0f0f0', '#f0f0f0', '#f0f0f0', '#d0d0d0']);
+    }
+
+
+}, [filter]);
 
 return (
     
@@ -51,28 +68,38 @@ return (
             <ListItemIcon>
                 <InboxIcon />
             </ListItemIcon>
-            <ListItemText primary="Sort By" />
+            <ListItemText primary="Filters" />
         {open ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
+
+            <ListItemButton sx={{ pl: 4, borderRadius: '12px', backgroundColor: buttonColor[0] }} onClick={() => setFilter(0)}>
             <ListItemIcon>
                 <StarBorder />
             </ListItemIcon>
-            <ListItemText primary="Due Date" />
+            <ListItemText primary="All"  />
             </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
+
+            <ListItemButton   sx={{ pl: 4, borderRadius: '12px', backgroundColor: buttonColor[1] }} onClick={() => setFilter(1)} >
             <ListItemIcon>
                 <StarBorder />
             </ListItemIcon>
-            <ListItemText primary="Priority" />
+            <ListItemText  primary="Due Date" />
             </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
+
+            <ListItemButton  sx={{ pl: 4, borderRadius: '12px', backgroundColor: buttonColor[2] }} onClick={() => setFilter(2)}>
             <ListItemIcon>
                 <StarBorder />
             </ListItemIcon>
-            <ListItemText primary="Status" />
+            <ListItemText  primary="Priority"  />
+            </ListItemButton>
+
+            <ListItemButton sx={{ pl: 4, borderRadius: '12px', backgroundColor: buttonColor[3] }}  onClick={() => setFilter(3)}>
+            <ListItemIcon>
+                <StarBorder />
+            </ListItemIcon>
+            <ListItemText  primary="Status" />
             </ListItemButton>
         </List>
         </Collapse>
