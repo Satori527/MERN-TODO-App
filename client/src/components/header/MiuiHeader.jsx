@@ -33,7 +33,7 @@ function ResponsiveAppBar() {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleLoginNavigation = () => {
-        Navigate('/login')
+        Navigate('/')
     };
 
     const handleOpenNavMenu = (event) => {
@@ -54,7 +54,7 @@ function ResponsiveAppBar() {
     const handleLogout = () => {
         setAnchorElUser(null);
         dispatch(logout())
-        Navigate('/login')
+        Navigate('/')
     };
 
 return (
