@@ -1,7 +1,8 @@
 import axios from "axios";
 
+
 export const axiosAPI = axios.create({
     
-    baseURL: "http://localhost:8000/api",
+    baseURL: "https://mern-todo-app-api-omega.vercel.app/api",
     withCredentials: true
 })

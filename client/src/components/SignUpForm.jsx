@@ -70,5 +70,5 @@ function SignupForm() {
     )
 }
 
-export { SignupForm };
+export default SignupForm;
 
