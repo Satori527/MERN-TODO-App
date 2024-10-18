@@ -37,7 +37,7 @@ const paginateTasks = asyncHandler(async (req, res) => {
     const startIndex=(page-1)*limit
     const lastIndex=(page)*limit
     let Tasks = {}
-    Tasks.data = await Task.find({user: user_id}).sort({created_at: -1}).skip((page-1)*limit).limit(limit)
+    Tasks.data = await Task.find({user: user_id}).sort({updatedAt: -1}).skip((page-1)*limit).limit(limit)
 
     // if(lastIndex<Tasks.length){
     //     Tasks.next={
