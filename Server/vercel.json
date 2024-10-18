@@ -1,12 +1,12 @@
 {
     "version": 2,
     "builds": [
-        {"src":"app.js", "use":"@version/node"}
+        {"src":"*.js", "use":"@version/node"}
     ],
     "routes": [
         {
             "src":"/(.*)",
-            "dest":"/app.js"
+            "dest":"/api/index.js"
         }
     ]
 }
