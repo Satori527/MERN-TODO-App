@@ -5,7 +5,7 @@ import express from "express";
 const app = express();
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: ["http://localhost:5173","https://mern-tudu.netlify.app","https://vercel.live/link/mern-todo-app-green.vercel.app?via=project-dashboard-alias-list&p=1","https://mern-todo-app-green.vercel.app/"],
     methods: ["GET", "POST", "PUT", "DELETE","PATCH"],
     credentials: true
 }))
