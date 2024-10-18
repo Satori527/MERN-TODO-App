@@ -1,4 +1,4 @@
-import EventNoteIcon from '@mui/icons-material/Eventnote';
+//import EventNoteIcon from '@mui/icons-material/Eventnote';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
@@ -61,7 +61,7 @@ return (
 <AppBar id="MuiHeader" position="sticky" sx={{zIndex: 998,boxShadow: '1px 2px 8px 1px rgba(0, 0, 0, 0.12)' }}>
     <Container maxWidth="2xl">
     <Toolbar disableGutters>
-        <EventNoteIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+        {/* <EventNoteIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
         <Typography
         variant="h6"
         noWrap
@@ -116,7 +116,7 @@ return (
             ))}
         </Menu>
         </Box>
-        <EventNoteIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+        {/* <EventNoteIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
 
 
         <Typography
