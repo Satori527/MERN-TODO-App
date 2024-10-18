@@ -77,7 +77,7 @@ function Dashboard() {
     const [dueDateSort, setDueDateSort] = useState(0);
 
     const fetchTasks = async () => {
-        const data = await axiosAPI.post("/tasks/paginate", {params: {user_id: userData.user._id, page: page, limit: 10}}, {withCredentials: true})
+        const data = await axiosAPI.get("/tasks/paginate", {params: {user_id: userData.user._id, page: page, limit: 10}}, {withCredentials: true})
         console.log(data)
         setTasks(data.data.data)
         console.log("tasks ",tasks)

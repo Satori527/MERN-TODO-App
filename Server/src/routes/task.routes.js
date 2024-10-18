@@ -21,7 +21,7 @@ const router = Router()
 
 router.route("/").get(verifyJWT ,fetchTasks).post(verifyJWT ,createTask);
 
-router.route("/paginate").post(verifyJWT ,paginateTasks)
+router.route("/paginate").get(verifyJWT ,paginateTasks)
 
 router.route("/update").patch(verifyJWT ,updateTask);
 router.route("/delete").patch(verifyJWT ,deleteTask);

@@ -6,7 +6,6 @@ const app = express();
 
 app.use(cors({
     origin: ["http://localhost:5173","https://mern-tudu.netlify.app","https://mern-todo-lqa1sp916-anubhav-sharmas-projects-767ac030.vercel.app/","https://mern-todo-app-green.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE","PATCH"],
     credentials: true
 }))
 
