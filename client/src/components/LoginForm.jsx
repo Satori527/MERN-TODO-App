@@ -56,7 +56,7 @@ function LoginForm() {
 
     return (
         <div className="bg-gray-50 flex flex-col gap-3 justify-center border border-gray-300 border-solid p-8 pt-16 rounded-lg shadow-lg align-middle min-w-96 w-1/5 h-96">
-            <h1 className="text-black font-bold text-3xl">Login</h1>
+            <h1 className="text-black font-bold text-4xl">Login</h1>
             
             {loginMsg() && <p className={`text-lg font-bold ${msgColor}`}>{loginMsg()}</p>}
             

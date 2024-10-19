@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { axiosAPI } from "../api/axiosAPI";
 import CustomCard from "../components/cards/CustomCard";
 import TaskForm from "../components/cards/TaskForm";
@@ -61,6 +62,14 @@ function Dashboard() {
 
     const auth = useSelector((state) => state.auth.status);
     const userData = useSelector((state) => state.auth.userData);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!auth){
+            navigate("/")
+        }
+    }, [auth])
 
     const priorities = ['High', 'Medium', 'Low'];
     const statuses = ['Pending', 'In Progress', 'Completed'];
