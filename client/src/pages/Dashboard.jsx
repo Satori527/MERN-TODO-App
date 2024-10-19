@@ -200,7 +200,7 @@ function Dashboard() {
     return (
         <div className="flex flex-row w-full h-svh">
             <List setFilter={setFilter} filter={filter} setCreateTask={setCreateTask}/>
-            <div className="flex flex-col w-full ml-56 mt-16 h-fit gap-4 relative bg-gray-400 pt-6 pb-40 rounded-2xl "
+            <div className="flex flex-col w-full ml-56 mt-16 h-fit min-h-[90vh] gap-4 relative bg-gray-400 pt-6 pb-40 rounded-2xl "
             style={{boxShadow: "inset 0 2px 8px 2px rgba(0, 0, 0, 0.5)"}}>
             
             <p>{filter===3 && statuses[status]}</p>
@@ -228,9 +228,9 @@ function Dashboard() {
                     >
                     Prev
                     </button>}
-                    <h2 className="text-black font-medium w-10 h-10  bg-gray-50 rounded-3xl flex justify-center items-center"
+                    {tasks.length>0 && <h2 className="text-black font-medium w-10 h-10  bg-gray-50 rounded-3xl flex justify-center items-center"
                     style={{boxShadow: "2px 4px 4px 2px rgba(0, 0, 0, 0.2)"}}
-                    >{page}</h2>
+                    >{page}</h2>}
                     {(tasks.length===10)&&<button className="w-20 h-10 bg-gray-50 rounded-3xl text-black font-medium hover:bg-gray-200 active:bg-gray-300 active:shadow-2 shadow-black"
                     style={{boxShadow: "2px 4px 4px 2px rgba(0, 0, 0, 0.2)"}}
                     onClick={handleNext}

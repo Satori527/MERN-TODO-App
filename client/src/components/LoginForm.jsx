@@ -80,7 +80,7 @@ function LoginForm() {
                         type="password"  />
                     
                 </div>
-                <input className="p-3 rounded-lg text-white font-medium text-xl bg-gray-900 drop-shadow-md my-4 hover:bg-black focus:bg-black focus:shadow-xl"
+                <input className="p-3 rounded-lg text-white font-medium text-xl bg-zinc-800 drop-shadow-md my-4 hover:bg-black focus:bg-black focus:shadow-xl"
 
                     type="submit"
                     value="Login" />

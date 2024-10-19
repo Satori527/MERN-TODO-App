@@ -18,7 +18,7 @@ function SignupForm() {
             console.log(response.data);
             setUserData(response.data);
             
-            navigate('/login')
+            navigate('/')
             
         }catch(err){
             console.log(err);
@@ -26,17 +26,17 @@ function SignupForm() {
     }
 
     return (
-        <>
-            <h1 className="text-teal-500 font-bold ">SignUp Form</h1>
+        <div className="bg-gray-50 flex flex-col gap-3 justify-center border border-gray-300 border-solid p-8 pt-16 rounded-lg shadow-lg align-middle min-w-96 w-1/5 h-[28rem]">
+            <h1 className="text-black font-bold text-4xl">SignUp</h1>
             
-            {userData && <p className=" text-lg text-teal-500 font-bold ">{userData.message}</p>}
+            {/* {userData && <p className=" text-lg text-teal-500 font-bold ">{userData.message}</p>} */}
             <div className="py-8 ">
             <form  className="flex flex-col gap-3" onSubmit={handleSubmit(createUser)}>
                 <div className="flex flex-col">
                     <label className="text-gray-500 font-medium text-left"
                         htmlFor="name">Username
                     </label>
-                    <input className= 'p-2 rounded-sm border-gray-300 border-solid border text-base hover:bg-teal-50 focus:bg-teal-50 outline-gray-300'
+                    <input className = 'p-2 rounded-lg border-gray-300 border-solid border text-base hover:bg-gray-100 focus:bg-gray-100 outline-gray-300'
                         {...register('name')}
                         type="text" />
                     
@@ -45,7 +45,7 @@ function SignupForm() {
                     <label className="text-gray-500 font-medium text-left"
                     htmlFor="email">Email
                     </label>
-                    <input className= 'p-2 rounded-sm border-gray-300 border-solid border text-base hover:bg-teal-50 focus:bg-teal-50 outline-gray-300'
+                    <input className= 'p-2 rounded-lg border-gray-300 border-solid border text-base hover:bg-gray-100 focus:bg-gray-100 outline-gray-300'
                         {...register('email')}
                         type="email"  />
                     
@@ -54,19 +54,19 @@ function SignupForm() {
                     <label className="text-gray-500 font-medium text-left"
                     htmlFor="password">Password
                     </label>
-                    <input className= 'p-2 rounded-sm border-gray-300 border-solid border text-base hover:bg-teal-50 focus:bg-teal-50 outline-gray-300'
+                    <input className= 'p-2 rounded-lg border-gray-300 border-solid border text-base hover:bg-gray-100 focus:bg-gray-100 outline-gray-300'
                         {...register('password')}
                         type="password"  />
                     
                 </div>
-                <input className="p-3 rounded text-white font-medium text-xl bg-teal-400 drop-shadow-md my-4 hover:bg-teal-500 focus:bg-teal-600 "
+                <input className="p-3 rounded-lg text-white font-medium text-xl bg-zinc-800 drop-shadow-md my-4 hover:bg-black focus:bg-black focus:shadow-xl"
 
                     type="submit"
                     value="Submit" />
             </form>
             </div>
             
-        </>
+        </div>
     )
 }
 
