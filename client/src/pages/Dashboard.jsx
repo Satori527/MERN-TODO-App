@@ -161,6 +161,7 @@ function Dashboard() {
     },[filter, priority, status, dueDateSort, userData, page])
 
     useEffect(() => {
+        setPage(1)
         setDueDateSort(0)
         setPriority(0)
         setStatus(0)
@@ -210,7 +211,7 @@ function Dashboard() {
                 
             </div>
 
-            {createTask && <TaskForm user={userData.user._id} setCreateTask={setCreateTask} />}
+            {createTask && <TaskForm user={userData.user._id} setCreateTask={setCreateTask} setPage={setPage} setFilter={setFilter} fetchTasks={fetchTasks} />}
 
                 {tasks.map((task) => (
                         <CustomCard key={task._id} id={task._id} title={task.title} description={task.description} due_date={task.due_date} priority={task.priority} status={task.status} user_id={task.user} fetchTasks={fetchTasks}/>

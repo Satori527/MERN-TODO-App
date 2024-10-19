@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { axiosAPI } from '../../api/axiosAPI';
 import "./CustomCard.css";
 
-function TaskForm({ user, setCreateTask}) {
+function TaskForm({ user, setCreateTask, setPage, setFilter, fetchTasks }) {
 
     const due_date = new Date(Date.now()).toISOString();
 
@@ -54,6 +54,9 @@ function TaskForm({ user, setCreateTask}) {
                     const response = await axiosAPI.post("/tasks/", data)
                     if (response.status === 200) {
                         setCreateTask(false);
+                        setPage(1);
+                        setFilter("All");
+                        fetchTasks();
                     }
                     console.log(response);
                     
