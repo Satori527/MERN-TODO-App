@@ -1,4 +1,4 @@
-# ASSIGNMENT - A TODO APP
+# A Full Stack Task Management buillt using MERN
 ![alt text](client/public/todo-db.png)
 
 developed by Anubhav Sharma
